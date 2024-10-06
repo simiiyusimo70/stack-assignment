@@ -1,0 +1,71 @@
+https://leetcode.com/problems/balanced-binary-tree/description/
+
+
+
+```cpp
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace st
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    vector&lt;int&gt; postorderTraversal(TreeNode* root) {
+        vector&lt;int&gt; result;
+        if (root == nullptr) {
+            return result;
+        }
+        
+        // Postorder traversal algorithm
+        postorderHelper(root, result);
+        
+        return result;
+    }
+    
+private:
+    void postorderHelper(TreeNode* node, vector&lt;int&gt;&amp; result) {
+        if (node == nullptr)
+            return;
+        postorderHelper(node-&gt;left, result);
+        
+        postorderHelper(node-&gt;right, result);
+        
+         result.push_back(node-&gt;val);
+     }
+};
+
+int main() {
+     /*
+          Construct a sample binary tree here...
+          For example:
+                    1
+                   / \
+                  2   3
+                 /
+                4
+
+      */
+      
+      TreeNode* root = new TreeNode(1);
+      root-&gt;left = new TreeNode(2);
+      root-&gt;right = new TreeNode(3);
+      root-&gt;left-&gt;left = new TreeNode(4);
+
+      
+      Solution sol; 
+      vector&lt;int&gt; postOrderTraversalResult = sol.postorderTraversal(root);
+
+  
+     cout &lt;&lt; &quot;Postorder Traversal: &quot;;
+     for (int i = ; i &lt; postOrderTraversalResult.size(); ++i)
+         cout &lt;&lt; postOrderTraversalResult[i] &lt;&lt; &quot; &quot;;
+
+     
+       return ;
+
+}
