@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    std::vector<int> inorderTraversal(TreeNode* root) {
+        std::vector<int> result;
+        std::stack<TreeNode*> stack;
+
+        while (root != nullptr || !stack.empty()) {
+            while (root != nullptr) {
+                stack.push(root);
+                root = root->left;
+            }
+            
+            root = stack.top();
+            stack.pop();
+            result.push_back(root->val);
+            
+            root = root->right;
+        }
+
+        return result;
+    }
+};
+
+int main() {
+
+  
+   TreeNode* root = new TreeNode(1);
+   root->left = new TreeNode(2);
+   root->right = new TreeNode(3);
+
+   Solution sol;
+
+  
+   std::vector<int> result = sol.inorderTraversal(root);
+
+   std::cout << "Inorder Traversal: ";
+   for (int value : result) {
+       std::cout << value << " ";
+   }
+
+}
