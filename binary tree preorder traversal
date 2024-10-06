@@ -1,0 +1,61 @@
+include <iostream>
+#include <vector>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> result;
+        if (root == nullptr) {
+            return result;
+        }
+
+        // Preorder traversal algorithm
+        preorderHelper(root, result);
+
+        return result;
+    }
+
+private:
+    void preorderHelper(TreeNode* node, vector<int>& result) {
+        if (node == nullptr)
+            return;
+
+
+		result.push_back(node->val);
+
+		
+		preorderHelper(node->left, result);
+
+		
+   		preorderHelper(node->right, result);
+   }
+};
+
+int main() {
+
+
+TreeNode* root = new TreeNode(1);
+root->left = new TreeNode(2);
+root->right = new TreeNode(3);
+root->right->left = new TreeNode(4);
+
+
+Solution sol; 
+vector<int> preOrderTraversalResult = sol.preorderTraversal(root);
+
+
+cout << "Preorder Traversal: ";
+for (int i = ; i < preOrderTraversalResult.size(); ++i)
+	cout << preOrderTraversalResult[i] << " ";
+
+return ;
+
+}
